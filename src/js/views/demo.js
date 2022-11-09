@@ -10,12 +10,12 @@ export const Demo = () => {
 
 	return (
 		<div className="container">
-			<ul className="list-group">
+			<ul className="list-group col col-6 d-flex justify-content-center">
 				{store.demo.map((item, index) => {
 					return (
 						<li
 							key={index}
-							className="list-group-item d-flex justify-content-between"
+							className="list-group-item d-flex justify-content-between bg-dark text-light"
 							style={{ background: item.background }}>
 							<Link to={"/single/" + index}>
 								<span>Link to: {item.title}</span>
@@ -36,7 +36,7 @@ export const Demo = () => {
 			</ul>
 			<br />
 			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
+				<button className="btn btn-warning">Back home</button>
 			</Link>
 		</div>
 	);
