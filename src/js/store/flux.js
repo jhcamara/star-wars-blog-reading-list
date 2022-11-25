@@ -12,7 +12,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			characters:[],
+			vehicles:[],
+			planets:[],
+			character:[],
+			vehicle:[],
+			planet:[],
+			favorites:[],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,8 +44,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
-		}
+			},
+
+			// my code starts here
+
+			fetchCharacter: () => {
+				const store = getStore();
+				fetch("https://www.swapi.tech/api/people/" , {
+					method: "GET",
+					headers: { "Content-Type": "application/json" },
+				})
+					.then((resp) => {
+						return resp.json();
+					})
+					.then(data => {
+						//return data;
+						let dataGathered = data.results.map((item,index) => {
+							return {...item,index:index,type:"people",favorite:false};
+						}); 
+
+						setStore({people : dataGathered});
+					})
+				   
+			},
+			}       
+
+
 	};
 };
 
