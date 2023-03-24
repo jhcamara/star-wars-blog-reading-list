@@ -13,10 +13,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			characters:[],
+			people:[],
 			vehicles:[],
 			planets:[],
-			character:[],
+			person:[],
 			vehicle:[],
 			planet:[],
 			favorites:[],
@@ -48,25 +48,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// my code starts here
 
-			fetchCharacter: () => {
-				const store = getStore();
-				fetch("https://www.swapi.tech/api/people/" , {
-					method: "GET",
-					headers: { "Content-Type": "application/json" },
-				})
-					.then((resp) => {
-						return resp.json();
+			getPeople: async () => {
+                try {
+					return fetch("https://www.swapi.tech/api/people?page=1&limit=10", {
+						method: "GET",
+						redirect: "follow"
 					})
-					.then(data => {
-						//return data;
-						let dataGathered = data.results.map((item,index) => {
-							return {...item,index:index,type:"people",favorite:false};
-						}); 
+						.then(response => response.json())
+						.then(data => setStore({ people: data.results}));
+				} catch (error) {
+					return [];
+				}
+            },
 
-						setStore({people : dataGathered});
+			getPerson: id => {
+				try {
+					return fetch(`https://www.swapi.tech/api/people/${id}`, {
+						method: "GET",
+						redirect: "follow"
 					})
-				   
+						.then(response => response.json())
+						.then(data => 
+							setStore({ person: data.result}));
+				} catch (error) {
+					return [];
+				}
 			},
+
 			}       
 
 

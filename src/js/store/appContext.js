@@ -26,6 +26,7 @@ const injectContext = PassedComponent => {
             .then(res => res.json())
             .then(data => console.log(data))
             .catch(err => console.error(err))
+			state.actions.getPeople();
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
