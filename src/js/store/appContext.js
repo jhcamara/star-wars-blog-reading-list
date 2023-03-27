@@ -27,6 +27,19 @@ const injectContext = PassedComponent => {
             .then(data => console.log(data))
             .catch(err => console.error(err))
 			state.actions.getPeople();
+
+			fetch("https://www.swapi.tech/api/vehicles")
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error(err))
+			state.actions.getVehicles();
+
+			fetch("https://www.swapi.tech/api/planets")
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error(err))
+			state.actions.getPlanets();
+			
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

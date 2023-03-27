@@ -75,6 +75,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getVehicles: async () => {
+                try {
+					return fetch("https://www.swapi.tech/api/vehicles?page=1&limit=10", {
+						method: "GET",
+						redirect: "follow"
+					})
+						.then(response => response.json())
+						.then(data => setStore({ vehicles: data.results}));
+				} catch (error) {
+					return [];
+				}
+            },
+
+
+			getVehicle: id => {
+				try {
+					return fetch(`https://www.swapi.tech/api/vehicles/${id}`, {
+						method: "GET",
+						redirect: "follow"
+					})
+						.then(response => response.json())
+						.then(data => 
+							setStore({ vehicle: data.result}));
+				} catch (error) {
+					return [];
+				}
+			},
+
 			}       
 
 
