@@ -103,6 +103,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+			getPlanets: async () => {
+                try {
+					return fetch("https://www.swapi.tech/api/Planets?page=1&limit=10", {
+						method: "GET",
+						redirect: "follow"
+					})
+						.then(response => response.json())
+						.then(data => setStore({ planets: data.results}));
+				} catch (error) {
+					return [];
+				}
+            },
+
+
+			getPlanet: id => {
+				try {
+					return fetch(`https://www.swapi.tech/api/planets/${id}`, {
+						method: "GET",
+						redirect: "follow"
+					})
+						.then(response => response.json())
+						.then(data => 
+							setStore({ planet: data.result}));
+				} catch (error) {
+					return [];
+				}
+			},
+
 			}       
 
 

@@ -1,54 +1,53 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 
-export const Character = () => {
+const CharDetails = () => {
+  	const {store, actions} = useContext(Context);
+  	const {id} = useParams();
+  
+  	useEffect(() => {
+		console.log(id);
+		actions.getPerson(id);
+  	}, []);
 
-    const { store, actions } = useContext(Context);
-  
-    return (
-      <div className="text-center mt-5">
-        <img
-          className="img-fluid mb-4"
-          src="https://cdna.artstation.com/p/assets/images/images/003/205/438/large/anderson-vieira-banner-starwars.jpg?1471027030"
-        ></img>
-        <div className="d-flex">
-          <h3 className="text-warning align-self-center">Characters</h3>
-        </div>
-  
-  
-       
-        <div className="cardWrapper d-flex justify-content-around mt-3">
-  
-        {store.people.map((value, i) => (
-        <div key={i} className="card" Style={"width: 18rem"}>
-          <img
-            className="card-img-top"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlZ206b-NadqcsiTY5cG7Xj9XAjyNae8EsBw&usqp=CAU"
-            alt="Card image cap"
-          />
-          <div className="card-body">
-            <h5 className="card-title">{value.name}</h5>
-            <p className="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <div className="d-flex justify-content-between align-items-bottom">
-              <a href="#" className="btn btn-warning mb-1">
-                Learn more
-              </a>
-              <i className="fa fa-solid fa-heart mt-1"></i>
-            </div>
-          </div>
-  
-        </div>
-          ))}
-  
-        </div>
-      
-  
-        <a href="https://www.starwars.com/" className="btn btn-warning">
-          Satisfy your geek cravings!
-        </a>
-      </div>
-    );
-  };
-  
+  	if (store.person) {
+		return (
+			<div className="jumbotron ">
+
+				<div className="card" style={{ maxWidth: "60%", margin: "auto", background: "#282727"}}>
+					<div className="row g-0">
+						<div className="col-md-3">
+							<img src={"https://starwars-visualguide.com/assets/img/characters/" + id + ".jpg"}  className="img-fluid rounded-start" alt="..." />
+						</div>
+						<div className="col-md-8">
+							<div className="card-body">
+								<h2 className="card-title text-light"></h2>
+								<p className="textCard card-text text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus lobortis mi ut tempor. Curabitur ultrices dapibus nisl. Sed dictum tempor ligula, eget varius enim dignissim eu. Maecenas ut sapien sagittis odio elementum eleifend convallis sollicitudin erat. Praesent finibus ligula turpis, ac placerat enim euismod ut. Maecenas laoreet dolor leo, ut ultricies ex ultricies vel.</p>
+								<p className="card-text text-light"><small className="text-muted">Last updated 3 mins ago</small></p>							
+							</div>
+						</div>
+					</div>
+
+					<div className="singleViewDetails container text-center">
+						<div className="row row-cols-6">
+							<div className="spacer col text-light"><h5>Name</h5><h5>{store.person.properties.name}</h5></div>
+							<div className="spacer col text-light"><h5>Birth Year</h5><h5>{store.person.properties.birth_year}</h5></div>
+							<div className="spacer col text-light"><h5>Gender</h5><h5>{store.person.properties.gender}</h5></div>
+							<div className="spacer col text-light"><h5>Height</h5><h5>{store.person.properties.height}</h5></div>
+							<div className="spacer col text-light"><h5>Skin Color</h5><h5>{store.person.properties.skin_color}</h5></div>
+							<div className="onlyUp col text-light"><h5>Eye color</h5><h5>{store.person.properties.eye_color}</h5></div>
+						</div>
+					</div>
+				</div>
+			
+		</div>
+	)}
+	else {
+        return <div className="text-light text-center mt-5">Loading please wait...</div>;
+      }
+};
+
+
+
+export default CharDetails

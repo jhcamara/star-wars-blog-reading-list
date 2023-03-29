@@ -1,5 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import "../../styles/home.css";
+import { CharacterBar } from "../component/CharacterBar";
+import { PlanetBar } from "../component/PlanetBar";
+import { VehicleBar } from "../component/VehicleBar";
 import { Context } from "../store/appContext";
 // import { fa-heart } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,99 +18,14 @@ export const Home = () => {
 
       {/* CHARACTERS */}
 
-      <div className="d-flex">
-        <h3 className="text-warning align-self-center mt-5">Characters</h3>
-      </div>
-
-      <div className="cardWrapper d-flex justify-content-around mt-3">
-        {store.people.map((value, i) => (
-          <div key={i} className="card" Style={"width: 18rem"}>
-            <img
-              className="card-img-top"
-              src={
-                "https://starwars-visualguide.com/assets/img/characters/" +
-                value.uid +
-                ".jpg"
-              }
-              alt="Card image cap"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{value.name}</h5>
-              <p className="card-text">Some quick example text .</p>
-              <div className="d-flex justify-content-between align-items-bottom">
-                <a href="#" className="btn btn-warning mb-1">
-                  Learn more
-                </a>
-                <i className="fa fa-solid fa-heart mt-1"></i>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <CharacterBar />
 
       {/* VEHICLES */}
-
-      <div className="d-flex">
-        <h3 className="text-warning align-self-center mt-5">Vehicles</h3>
-      </div>
-
-      <div className="cardWrapper d-flex justify-content-around mt-3">
-        {store.people.map((value, i) => (
-          <div key={i} className="card" Style={"width: 18rem"}>
-            <img
-              className="card-img-top"
-              src={
-                "https://starwars-visualguide.com/assets/img/vehicles/" +
-                value.uid +
-                ".jpg"
-              }
-              alt="Card image cap"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{value.name}</h5>
-              <p className="card-text">Some quick example text.</p>
-              <div className="d-flex justify-content-between align-items-bottom">
-                <a href="#" className="btn btn-warning mb-1">
-                  Learn more
-                </a>
-                <i className="fa fa-solid fa-heart mt-1"></i>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <VehicleBar />
 
       {/* PLANETS */}
 
-      <div className="d-flex">
-        <h3 className="text-warning align-self-center mt-5">Planets</h3>
-      </div>
-
-      <div className="cardWrapper d-flex justify-content-around mt-3">
-        {store.people.map((value, i) => (
-          <div key={i} className="card" Style={"width: 18rem"}>
-            <img
-              className="card-img-top"
-              src={
-                "https://starwars-visualguide.com/assets/img/planets/" +
-                value.uid +
-                ".jpg"
-              }
-              alt="Card image cap"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{value.name}</h5>
-              <p className="card-text">Some quick example text.</p>
-              <div className="d-flex justify-content-between align-items-bottom">
-                <a href="#" className="btn btn-warning mb-1">
-                  Learn more
-                </a>
-                <i className="fa fa-solid fa-heart mt-1"></i>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <PlanetBar />
 
       <a href="https://www.starwars.com/" className="btn btn-warning">
         Satisfy your geek cravings!
